@@ -1,35 +1,21 @@
-const item = document.querySelector(".item");
-const placeholders = document.querySelectorAll(".placeholder");
+function slidesPlugin() {
+  const slides = document.querySelectorAll(".slide");
+  
+  const clearActiveClasses = () => {
+    slides.forEach((slide) => {
+      slide.classList.remove("active");
+    });
+  };
 
-const dragstart = (e) => {
-  e.target.classList.add("hold");
-  setTimeout(() => e.target.classList.add("hide"), 0);
-};
+  slides.forEach((slide) => {
+    slide.addEventListener("click", () => {
+      clearActiveClasses();
 
-const dragend = (e) => {
-  e.target.className = "item";
-};
+      slide.classList.add("active");
+    });
+  });
+}
 
-const dragover = (e) => {
-  e.preventDefault();
-};
-const dragenter = (e) => {
-  e.target.classList.add("hovered");
-};
-const dragleave = (e) => {
-  e.target.classList.remove("hovered");
-};
-const dragdrop = (e) => {
-  e.target.append(item);
-  e.target.classList.remove("hovered");
-};
 
-placeholders.forEach((el) => {
-  el.addEventListener("dragover", dragover);
-  el.addEventListener("dragenter", dragenter);
-  el.addEventListener("dragleave", dragleave);
-  el.addEventListener("drop", dragdrop);
-});
 
-item.addEventListener("dragstart", dragstart);
-item.addEventListener("dragend", dragend);
+slidesPlugin()
